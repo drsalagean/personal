@@ -1,5 +1,21 @@
-- uses: ingka-group-digital/lint-openapi@v1.0.1
-    with:
-      files: |
-        api/openapi.yml
-      shouldApplyGatewayRules: true
+name: Lint OpenAPI in IKEA API Gateway
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - api/openapi.yml
+
+jobs:
+  lint-openapi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Lint OpenAPI specifications
+        uses: ingka-group-digital/lint-openapi@v1.0.1
+        with:
+          files: |
+            api/openapi.yml
+          shouldApplyGatewayRules: true
